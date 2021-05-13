@@ -24,10 +24,16 @@ struct MissionView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.7)
-                        .padding(.top)
+                        .padding()
+                    
+                    Text("Launch Date: \(self.mission.formattedLaunchDate)")
+                        .font(.headline)
+                        .padding(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Text(self.mission.description)
                         .padding()
+                        .layoutPriority(1)
                     
                     ForEach(self.astronauts, id: \.role) { crewMember in
                         NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut)) {
