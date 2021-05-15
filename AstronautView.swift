@@ -22,6 +22,11 @@ struct AstronautView: View {
                     Text(self.astronaut.description)
                         .padding()
                         .layoutPriority(1)
+                    
+                    Text("Missions: \(astronaut.missionsFlown)")
+                        .font(.headline)
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }

@@ -66,16 +66,16 @@
 		E7612E1D2649776000DA7501 /* Moonshot */ = {
 			isa = PBXGroup;
 			children = (
-				E71305B7264B4DB300C33294 /* AstronautView.swift */,
 				E7612E1E2649776000DA7501 /* MoonshotApp.swift */,
+				E71305B7264B4DB300C33294 /* AstronautView.swift */,
 				E7612E202649776000DA7501 /* ContentView.swift */,
 				E71305B5264B41DA00C33294 /* MissionView.swift */,
-				E70FD4A12649D24600A4C1EF /* Mission.swift */,
 				E7612E222649776100DA7501 /* Assets.xcassets */,
 				E7612E272649776100DA7501 /* Info.plist */,
 				E70FD4992649CBD900A4C1EF /* astronauts.json */,
 				E70FD49D2649CCEC00A4C1EF /* Astronaut.swift */,
 				E70FD49F2649CDBA00A4C1EF /* Bundle-Decodable.swift */,
+				E70FD4A12649D24600A4C1EF /* Mission.swift */,
 				E70FD49A2649CBDA00A4C1EF /* missions.json */,
 				E7612E242649776100DA7501 /* Preview Content */,
 			);
