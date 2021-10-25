@@ -25,11 +25,13 @@ struct MissionView: View {
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.7)
                         .padding()
+                        .accessibilityRemoveTraits(.isImage)
                     
                     Text("Launch Date: \(self.mission.formattedLaunchDate)")
                         .font(.headline)
                         .padding(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .accessibilityLabel(mission.formattedLaunchDate == "N/A" ? "Launch date: not available" : "Launch date: \(mission.formattedLaunchDate)")
                     
                     Text(self.mission.description)
                         .padding()
@@ -38,11 +40,12 @@ struct MissionView: View {
                     ForEach(self.astronauts, id: \.role) { crewMember in
                         NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut)) {
                             HStack {
-                                Image(crewMember.astronaut.id)
+                                Image(decorative: crewMember.astronaut.id)
                                     .resizable()
                                     .frame(width: 83, height: 60)
                                     .clipShape(Capsule())
                                     .overlay(Capsule().stroke(Color.primary, lineWidth: 1))
+                                    .accessibilityRemoveTraits(.isImage)
                                 VStack(alignment: .leading) {
                                     Text(crewMember.astronaut.name)
                                         .font(.headline)
