@@ -16,22 +16,37 @@ struct ContentView: View {
         NavigationView {
             List(missions) { mission in
                 NavigationLink(destination: MissionView(mission: mission, astronauts: self.astronauts)) {
-                    Image(mission.image)
+                    Image(decorative: mission.image)
                         .resizable()
                         .scaledToFit() //same as .aspectRatio(contentMode: .fit)
                         .frame(width: 44, height: 44)
-                    
+                        .accessibilityRemoveTraits(.isImage)
+
                     VStack(alignment: .leading) {
                         Text(mission.displayName)
                             .font(.headline)
-                        Text(showingLaunchDate ? mission.formattedLaunchDate : mission.crewNames)
+                        if showingLaunchDate {
+                            Text(mission.formattedLaunchDate)
+                        } else {
+                            Text(mission.crewNames)
+                        }
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel(mission.displayName)
+                    .accessibilityValue(showingLaunchDate ?
+                                        "\(mission.formattedLaunchDate == "N/A" ? "Launch date: not available" : mission.formattedLaunchDate)" :
+                                        mission.crewNames
+                    )
                 }
             }
             .navigationBarTitle("Moonshot")
-            .navigationBarItems(trailing: Button(showingLaunchDate ? "Crew Names" : "Launch Date") {
-                self.showingLaunchDate.toggle()
-            })
+            .navigationBarItems(trailing:
+                                    Button(showingLaunchDate ? "Crew Names" : "Launch Date") {
+                                        self.showingLaunchDate.toggle()
+                                    }
+                                    .accessibilityLabel("\(showingLaunchDate ? "Show crewmember names" : "Show launch date")")
+            )
+            
         }
     }
 }
