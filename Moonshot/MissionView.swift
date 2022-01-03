@@ -18,14 +18,23 @@ struct MissionView: View {
     
     var body: some View {
         GeometryReader { geometry in
+            let badgeOriginalMaxHeight = geometry.size.width * 0.7
+            
             ScrollView(.vertical) {
                 VStack {
-                    Image(self.mission.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: geometry.size.width * 0.7)
-                        .padding()
-                        .accessibilityRemoveTraits(.isImage)
+                    GeometryReader { badgeGeometry in
+                        let badgeNewMaxHeight = badgeGeometry.frame(in: .global).maxY - geometry.frame(in: .global).minY
+                        let badgeNewScale = badgeNewMaxHeight / badgeOriginalMaxHeight
+                        
+                        Image(self.mission.image)
+                            .resizable()
+                            .scaleEffect(badgeNewScale >= 0.8 ? badgeNewScale : 0.8, anchor: .bottom)
+                            .scaledToFit()
+                            .frame(maxWidth: geometry.size.width)
+                            .padding()
+                            .accessibilityRemoveTraits(.isImage)
+                    }
+                    .frame(height: badgeOriginalMaxHeight)
                     
                     Text("Launch Date: \(self.mission.formattedLaunchDate)")
                         .font(.headline)
@@ -90,6 +99,6 @@ struct MissionView_Previews: PreviewProvider {
     static let astronauts: [Astronaut] = Bundle.main.decode("astronauts.json")
     
     static var previews: some View {
-        MissionView(mission: missions[0], astronauts: astronauts)
+        MissionView(mission: missions[1], astronauts: astronauts)
     }
 }
